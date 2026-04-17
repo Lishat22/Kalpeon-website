@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Messages - Kalpeon Admin</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin-style.css') }}">
+</head>
+<body>
+    <div class="admin-layout">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Kalpeon Admin</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <li><a href="{{ url_for('admin_dashboard') }}">📊 Dashboard</a></li>
+                <li><a href="{{ url_for('admin_news_list') }}">📰 News</a></li>
+                <li><a href="{{ url_for('admin_industries_list') }}">🏭 Industries</a></li>
+                <li><a href="{{ url_for('admin_services_list') }}">⚙️ Services</a></li>
+                <li><a href="{{ url_for('admin_jobs_list') }}">💼 Jobs</a></li>
+                <li><a href="{{ url_for('admin_team_list') }}">👥 Team</a></li>
+                <li><a href="{{ url_for('admin_contacts_list') }}" class="active">📧 Contacts</a></li>
+                <li><a href="{{ url_for('admin_settings') }}">⚙️ Settings</a></li>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="{{ url_for('admin_logout') }}" style="color: #ff6b6b;">🚪 Logout</a>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <div class="topbar">
+                <h1>Contact Messages</h1>
+            </div>
+
+            {% if success_message %}
+            <div class="alert alert-success">{{ success_message }}</div>
+            {% endif %}
+
+            <div class="content-section">
+                {% if contacts %}
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Subject</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for contact in contacts %}
+                        <tr>
+                            <td><strong>{{ contact.name }}</strong></td>
+                            <td>{{ contact.email }}</td>
+                            <td>{{ contact.phone }}</td>
+                            <td>{{ contact.subject }}</td>
+                            <td>{{ contact.created_at.strftime('%Y-%m-%d %H:%M') }}</td>
+                            <td>
+                                {% if contact.is_read %}
+                                <span class="badge badge-success">Read</span>
+                                {% else %}
+                                <span class="badge badge-warning">Unread</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <div class="action-buttons">
+                                    <a href="{{ url_for('admin_contact_detail', contact_id=contact.id) }}" class="btn btn-info btn-sm">View</a>
+                                    <form method="POST" action="{{ url_for('admin_contact_delete', contact_id=contact.id) }}" style="display: inline;" onsubmit="return confirm('Are you sure?');">
+                                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <div class="no-data">
+                    <p>No contact messages yet.</p>
+                </div>
+                {% endif %}
+            </div>
+        </main>
+    </div>
+</body>
+</html>

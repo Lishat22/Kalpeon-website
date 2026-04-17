@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Settings - Kalpeon Admin</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin-style.css') }}">
+</head>
+<body>
+    <div class="admin-layout">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Kalpeon Admin</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <li><a href="{{ url_for('admin_dashboard') }}">📊 Dashboard</a></li>
+                <li><a href="{{ url_for('admin_news_list') }}">📰 News</a></li>
+                <li><a href="{{ url_for('admin_industries_list') }}">🏭 Industries</a></li>
+                <li><a href="{{ url_for('admin_services_list') }}">⚙️ Services</a></li>
+                <li><a href="{{ url_for('admin_jobs_list') }}">💼 Jobs</a></li>
+                <li><a href="{{ url_for('admin_team_list') }}">👥 Team</a></li>
+                <li><a href="{{ url_for('admin_contacts_list') }}">📧 Contacts</a></li>
+                <li><a href="{{ url_for('admin_settings') }}" class="active">⚙️ Settings</a></li>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="{{ url_for('admin_logout') }}" style="color: #ff6b6b;">🚪 Logout</a>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <div class="topbar">
+                <h1>Website Settings</h1>
+            </div>
+
+            {% if success_message %}
+            <div class="alert alert-success">{{ success_message }}</div>
+            {% endif %}
+
+            {% if errors %}
+            <div class="alert alert-error">
+                <ul style="margin: 0; padding-left: 20px;">
+                    {% for error in errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
+            <div class="content-section">
+                <h2>General Settings</h2>
+                <form method="POST">
+                    <div class="form-group">
+                        <label for="site_title">Website Title *</label>
+                        <input type="text" id="site_title" name="site_title" required value="{{ settings.site_title if settings else 'Kalpeon Group' }}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="site_description">Website Description *</label>
+                        <textarea id="site_description" name="site_description" required>{{ settings.site_description if settings else '' }}</textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="logo_url">Logo URL</label>
+                        <input type="url" id="logo_url" name="logo_url" value="{{ settings.logo_url if settings else '' }}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="favicon_url">Favicon URL</label>
+                        <input type="url" id="favicon_url" name="favicon_url" value="{{ settings.favicon_url if settings else '' }}">
+                    </div>
+
+                    <hr style="margin: 2rem 0; border: none; border-top: 1px solid #ddd;">
+
+                    <h2 style="margin-top: 1rem;">Contact Information</h2>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="contact_email">Contact Email *</label>
+                            <input type="email" id="contact_email" name="contact_email" required value="{{ settings.contact_email if settings else '' }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="contact_phone">Contact Phone *</label>
+                            <input type="tel" id="contact_phone" name="contact_phone" required value="{{ settings.contact_phone if settings else '' }}">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="address">Business Address *</label>
+                        <textarea id="address" name="address" required>{{ settings.address if settings else '' }}</textarea>
+                    </div>
+
+                    <hr style="margin: 2rem 0; border: none; border-top: 1px solid #ddd;">
+
+                    <h2 style="margin-top: 1rem;">Social Media Links</h2>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="facebook_url">Facebook URL</label>
+                            <input type="url" id="facebook_url" name="facebook_url" value="{{ settings.facebook_url if settings else '' }}" placeholder="https://facebook.com/...">
+                        </div>
+                        <div class="form-group">
+                            <label for="twitter_url">Twitter URL</label>
+                            <input type="url" id="twitter_url" name="twitter_url" value="{{ settings.twitter_url if settings else '' }}" placeholder="https://twitter.com/...">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="linkedin_url">LinkedIn URL</label>
+                            <input type="url" id="linkedin_url" name="linkedin_url" value="{{ settings.linkedin_url if settings else '' }}" placeholder="https://linkedin.com/...">
+                        </div>
+                        <div class="form-group">
+                            <label for="instagram_url">Instagram URL</label>
+                            <input type="url" id="instagram_url" name="instagram_url" value="{{ settings.instagram_url if settings else '' }}" placeholder="https://instagram.com/...">
+                        </div>
+                    </div>
+
+                    <hr style="margin: 2rem 0; border: none; border-top: 1px solid #ddd;">
+
+                    <h2 style="margin-top: 1rem;">Company Statistics</h2>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="years_established">Years in Business</label>
+                            <input type="number" id="years_established" name="years_established" value="{{ settings.years_established if settings else '' }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="employees_count">Number of Employees</label>
+                            <input type="number" id="employees_count" name="employees_count" value="{{ settings.employees_count if settings else '' }}">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="projects_completed">Projects Completed</label>
+                            <input type="number" id="projects_completed" name="projects_completed" value="{{ settings.projects_completed if settings else '' }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="clients_served">Clients Served</label>
+                            <input type="number" id="clients_served" name="clients_served" value="{{ settings.clients_served if settings else '' }}">
+                        </div>
+                    </div>
+
+                    <div class="form-buttons">
+                        <a href="{{ url_for('admin_dashboard') }}" class="btn btn-secondary">Cancel</a>
+                        <button type="submit" class="btn btn-primary">Save Settings</button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

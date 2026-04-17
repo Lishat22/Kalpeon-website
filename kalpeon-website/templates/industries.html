@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+
+{% block title %}Industries - Kalpeon Group of Industry{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<div class="page-header">
+    <h1>Our Industries</h1>
+    <p>Diverse Portfolio Across Key Sectors</p>
+</div>
+
+<!-- Industries Grid -->
+<section class="industries-detailed">
+    <div class="container">
+        <div class="industries-list">
+            {% for industry in industries %}
+            <div class="industry-detail-card">
+                <div class="industry-icon">
+                    <i class="fas fa-{{ industry.icon }}"></i>
+                </div>
+                <div class="industry-text">
+                    <h3>{{ industry.name }}</h3>
+                    <p>{{ industry.description }}</p>
+                    <a href="#" class="btn btn-small">Learn More</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Industry Capabilities -->
+<section class="capabilities-section">
+    <div class="container">
+        <h2>Our Capabilities</h2>
+        <div class="capabilities-grid">
+            <div class="capability-card">
+                <i class="fas fa-cube"></i>
+                <h3>Manufacturing Excellence</h3>
+                <p>State-of-the-art facilities with advanced automation and quality control</p>
+            </div>
+            <div class="capability-card">
+                <i class="fas fa-code"></i>
+                <h3>Technology Innovation</h3>
+                <p>Dedicated R&D centers developing next-generation solutions</p>
+            </div>
+            <div class="capability-card">
+                <i class="fas fa-shield"></i>
+                <h3>Quality Assurance</h3>
+                <p>ISO certified processes ensuring highest standards across all operations</p>
+            </div>
+            <div class="capability-card">
+                <i class="fas fa-users-cog"></i>
+                <h3>Skilled Workforce</h3>
+                <p>Comprehensive training programs for continuous development of our teams</p>
+            </div>
+            <div class="capability-card">
+                <i class="fas fa-chart-line"></i>
+                <h3>Market Leadership</h3>
+                <p>Top-tier market positions in each industry segment</p>
+            </div>
+            <div class="capability-card">
+                <i class="fas fa-globe"></i>
+                <h3>Global Network</h3>
+                <p>Extensive supply chain and distribution networks worldwide</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Market Share -->
+<section class="market-section">
+    <div class="container">
+        <h2>Market Position</h2>
+        <div class="market-grid">
+            <div class="market-item">
+                <h3>Manufacturing</h3>
+                <div class="market-stat">
+                    <div class="stat-bar" style="width: 85%"></div>
+                    <span>85% - Market Leader</span>
+                </div>
+            </div>
+            <div class="market-item">
+                <h3>Technology</h3>
+                <div class="market-stat">
+                    <div class="stat-bar" style="width: 72%"></div>
+                    <span>72% - Top Player</span>
+                </div>
+            </div>
+            <div class="market-item">
+                <h3>Energy</h3>
+                <div class="market-stat">
+                    <div class="stat-bar" style="width: 68%"></div>
+                    <span>68% - Key Provider</span>
+                </div>
+            </div>
+            <div class="market-item">
+                <h3>Pharmaceuticals</h3>
+                <div class="market-stat">
+                    <div class="stat-bar" style="width: 79%"></div>
+                    <span>79% - Industry Leader</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

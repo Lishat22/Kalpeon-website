@@ -1,0 +1,193 @@
+{% extends "base.html" %}
+
+{% block title %}Contact Us - Kalpeon Group of Industry{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<div class="page-header">
+    <h1>Contact Us</h1>
+    <p>Get in Touch with Kalpeon Group</p>
+</div>
+
+<!-- Contact Section -->
+<section class="contact-section">
+    <div class="container">
+        <div class="contact-grid">
+            <!-- Contact Form -->
+            <div class="contact-form-wrapper">
+                <h2>Send us a Message</h2>
+                <form id="contactForm" class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Full Name *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject">Subject *</label>
+                        <select id="subject" name="subject" required>
+                            <option value="">Select a subject</option>
+                            <option value="General Inquiry">General Inquiry</option>
+                            <option value="Business Partnership">Business Partnership</option>
+                            <option value="Job Application">Job Application</option>
+                            <option value="Service Request">Service Request</option>
+                            <option value="Feedback">Feedback</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Message *</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                    <p class="form-note">* Required fields</p>
+                </form>
+                <div id="formMessage" class="form-message" style="display: none;"></div>
+            </div>
+            
+            <!-- Contact Info -->
+            <div class="contact-info-wrapper">
+                <h2>Contact Information</h2>
+                
+                <div class="contact-info-box">
+                    <h3><i class="fas fa-map-marker-alt"></i> Headquarters</h3>
+                    <p>Kalpeon House<br>Mumbai, Maharashtra 400001<br>India</p>
+                </div>
+                
+                <div class="contact-info-box">
+                    <h3><i class="fas fa-phone"></i> Phone</h3>
+                    <p>Main: +91 (0) 22-XXXX-XXXX<br>Toll-free: 1-800-KALPEON<br>Available 24/7</p>
+                </div>
+                
+                <div class="contact-info-box">
+                    <h3><i class="fas fa-envelope"></i> Email</h3>
+                    <p>General: info@kalpeon.com<br>Support: support@kalpeon.com<br>Sales: sales@kalpeon.com</p>
+                </div>
+                
+                <div class="contact-info-box">
+                    <h3><i class="fas fa-clock"></i> Business Hours</h3>
+                    <p>Monday - Friday: 9:00 AM - 6:00 PM<br>Saturday: 10:00 AM - 4:00 PM<br>Sunday: Closed</p>
+                </div>
+                
+                <div class="contact-info-box">
+                    <h3><i class="fas fa-globe"></i> Global Offices</h3>
+                    <p>Singapore | Tokyo | Dubai | London | New York | São Paulo</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Map Section -->
+<section class="map-section">
+    <div class="container">
+        <h2>Visit Us</h2>
+        <div class="map-placeholder">
+            <i class="fas fa-map"></i>
+            <p>Our Location - Interactive Map Coming Soon</p>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="faq-section">
+    <div class="container">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h4><i class="fas fa-question-circle"></i> What is the best way to contact us?</h4>
+                    <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                </div>
+                <div class="faq-answer">
+                    <p>You can reach us through our contact form above, email at info@kalpeon.com, or call our main number during business hours. For urgent matters, our toll-free number is available 24/7.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h4><i class="fas fa-question-circle"></i> What are your response times?</h4>
+                    <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                </div>
+                <div class="faq-answer">
+                    <p>We typically respond to inquiries within 24 business hours. For urgent matters, we provide immediate support through our 24/7 helpline.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h4><i class="fas fa-question-circle"></i> Do you offer on-site consultations?</h4>
+                    <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes, we offer on-site consultations for qualified inquiries. Please mention this preference in your message and we'll arrange accordingly.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h4><i class="fas fa-question-circle"></i> How can I apply for a job?</h4>
+                    <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                </div>
+                <div class="faq-answer">
+                    <p>Visit our Careers page to view current openings. You can apply directly through our career portal or contact our HR department at careers@kalpeon.com.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Contact Form Handler
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const formData = new FormData(this);
+    const messageDiv = document.getElementById('formMessage');
+    
+    fetch('/contact', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        messageDiv.style.display = 'block';
+        if (data.success) {
+            messageDiv.className = 'form-message success';
+            messageDiv.textContent = data.message;
+            document.getElementById('contactForm').reset();
+        } else {
+            messageDiv.className = 'form-message error';
+            messageDiv.textContent = data.error;
+        }
+    })
+    .catch(error => {
+        messageDiv.style.display = 'block';
+        messageDiv.className = 'form-message error';
+        messageDiv.textContent = 'Error sending message: ' + error;
+    });
+});
+
+// FAQ Toggle
+document.querySelectorAll('.faq-question').forEach(question => {
+    question.addEventListener('click', function() {
+        const item = this.parentElement;
+        item.classList.toggle('active');
+    });
+});
+</script>
+{% endblock %}

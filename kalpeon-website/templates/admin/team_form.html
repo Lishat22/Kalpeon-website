@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if member %}Edit Team Member{% else %}Add Team Member{% endif %} - Kalpeon Admin</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin-style.css') }}">
+</head>
+<body>
+    <div class="admin-layout">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Kalpeon Admin</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <li><a href="{{ url_for('admin_dashboard') }}">📊 Dashboard</a></li>
+                <li><a href="{{ url_for('admin_news_list') }}">📰 News</a></li>
+                <li><a href="{{ url_for('admin_industries_list') }}">🏭 Industries</a></li>
+                <li><a href="{{ url_for('admin_services_list') }}">⚙️ Services</a></li>
+                <li><a href="{{ url_for('admin_jobs_list') }}">💼 Jobs</a></li>
+                <li><a href="{{ url_for('admin_team_list') }}" class="active">👥 Team</a></li>
+                <li><a href="{{ url_for('admin_contacts_list') }}">📧 Contacts</a></li>
+                <li><a href="{{ url_for('admin_settings') }}">⚙️ Settings</a></li>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="{{ url_for('admin_logout') }}" style="color: #ff6b6b;">🚪 Logout</a>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <div class="topbar">
+                <h1>{% if member %}Edit Team Member{% else %}Add New Team Member{% endif %}</h1>
+            </div>
+
+            {% if errors %}
+            <div class="alert alert-error">
+                <ul style="margin: 0; padding-left: 20px;">
+                    {% for error in errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
+            <div class="content-section">
+                <form method="POST">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Full Name *</label>
+                            <input type="text" id="name" name="name" required value="{{ member.name if member else '' }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="position">Position/Title *</label>
+                            <input type="text" id="position" name="position" required value="{{ member.position if member else '' }}">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="department">Department *</label>
+                            <input type="text" id="department" name="department" required value="{{ member.department if member else '' }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" required value="{{ member.email if member else '' }}">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bio">Biography</label>
+                        <textarea id="bio" name="bio">{{ member.bio if member else '' }}</textarea>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="photo_url">Photo URL</label>
+                            <input type="url" id="photo_url" name="photo_url" value="{{ member.photo_url if member else '' }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="tel" id="phone" name="phone" value="{{ member.phone if member else '' }}">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="linkedin">LinkedIn URL</label>
+                            <input type="url" id="linkedin" name="linkedin" value="{{ member.linkedin if member else '' }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="twitter">Twitter URL</label>
+                            <input type="url" id="twitter" name="twitter" value="{{ member.twitter if member else '' }}">
+                        </div>
+                    </div>
+
+                    <div class="form-buttons">
+                        <a href="{{ url_for('admin_team_list') }}" class="btn btn-secondary">Cancel</a>
+                        <button type="submit" class="btn btn-primary">{% if member %}Update Member{% else %}Add Member{% endif %}</button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

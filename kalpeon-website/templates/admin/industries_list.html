@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Industries - Kalpeon Admin</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin-style.css') }}">
+</head>
+<body>
+    <div class="admin-layout">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Kalpeon Admin</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <li><a href="{{ url_for('admin_dashboard') }}">📊 Dashboard</a></li>
+                <li><a href="{{ url_for('admin_news_list') }}">📰 News</a></li>
+                <li><a href="{{ url_for('admin_industries_list') }}" class="active">🏭 Industries</a></li>
+                <li><a href="{{ url_for('admin_services_list') }}">⚙️ Services</a></li>
+                <li><a href="{{ url_for('admin_jobs_list') }}">💼 Jobs</a></li>
+                <li><a href="{{ url_for('admin_team_list') }}">👥 Team</a></li>
+                <li><a href="{{ url_for('admin_contacts_list') }}">📧 Contacts</a></li>
+                <li><a href="{{ url_for('admin_settings') }}">⚙️ Settings</a></li>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="{{ url_for('admin_logout') }}" style="color: #ff6b6b;">🚪 Logout</a>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <div class="topbar">
+                <h1>Industries Management</h1>
+                <a href="{{ url_for('admin_industry_create') }}" class="btn btn-primary">+ Create Industry</a>
+            </div>
+
+            {% if success_message %}
+            <div class="alert alert-success">{{ success_message }}</div>
+            {% endif %}
+
+            <div class="content-section">
+                {% if industries %}
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Icon</th>
+                            <th>Industry Name</th>
+                            <th>Description</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for industry in industries %}
+                        <tr>
+                            <td style="font-size: 2rem;">{{ industry.icon }}</td>
+                            <td><strong>{{ industry.name }}</strong></td>
+                            <td>{{ industry.description[:60] }}...</td>
+                            <td>
+                                {% if industry.is_active %}
+                                <span class="badge badge-success">Active</span>
+                                {% else %}
+                                <span class="badge badge-danger">Inactive</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <div class="action-buttons">
+                                    <a href="{{ url_for('admin_industry_edit', industry_id=industry.id) }}" class="btn btn-info btn-sm">Edit</a>
+                                    <form method="POST" action="{{ url_for('admin_industry_delete', industry_id=industry.id) }}" style="display: inline;" onsubmit="return confirm('Are you sure?');">
+                                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <div class="no-data">
+                    <p>No industries found. <a href="{{ url_for('admin_industry_create') }}">Create one now!</a></p>
+                </div>
+                {% endif %}
+            </div>
+        </main>
+    </div>
+</body>
+</html>

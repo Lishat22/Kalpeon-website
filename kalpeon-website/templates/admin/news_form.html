@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if article %}Edit News{% else %}Create News{% endif %} - Kalpeon Admin</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin-style.css') }}">
+</head>
+<body>
+    <div class="admin-layout">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Kalpeon Admin</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <li><a href="{{ url_for('admin_dashboard') }}">📊 Dashboard</a></li>
+                <li><a href="{{ url_for('admin_news_list') }}" class="active">📰 News</a></li>
+                <li><a href="{{ url_for('admin_industries_list') }}">🏭 Industries</a></li>
+                <li><a href="{{ url_for('admin_services_list') }}">⚙️ Services</a></li>
+                <li><a href="{{ url_for('admin_jobs_list') }}">💼 Jobs</a></li>
+                <li><a href="{{ url_for('admin_team_list') }}">👥 Team</a></li>
+                <li><a href="{{ url_for('admin_contacts_list') }}">📧 Contacts</a></li>
+                <li><a href="{{ url_for('admin_settings') }}">⚙️ Settings</a></li>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="{{ url_for('admin_logout') }}" style="color: #ff6b6b;">🚪 Logout</a>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <div class="topbar">
+                <h1>{% if article %}Edit Article{% else %}Create New Article{% endif %}</h1>
+            </div>
+
+            {% if errors %}
+            <div class="alert alert-error">
+                <ul style="margin: 0; padding-left: 20px;">
+                    {% for error in errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
+            <div class="content-section">
+                <form method="POST" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="title">Article Title *</label>
+                        <input type="text" id="title" name="title" required value="{{ article.title if article else '' }}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="content">Article Content *</label>
+                        <textarea id="content" name="content" required>{{ article.content if article else '' }}</textarea>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="image_url">Featured Image URL</label>
+                            <input type="url" id="image_url" name="image_url" value="{{ article.image_url if article else '' }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="author">Author</label>
+                            <input type="text" id="author" name="author" value="{{ article.author if article else '' }}">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="category">Category</label>
+                        <input type="text" id="category" name="category" value="{{ article.category if article else '' }}" placeholder="e.g., Technology, Business, Industry">
+                    </div>
+
+                    <div class="form-check">
+                        <input type="checkbox" id="is_published" name="is_published" value="on" {% if article and article.is_published %}checked{% endif %}>
+                        <label for="is_published">Publish this article immediately</label>
+                    </div>
+
+                    <div class="form-buttons">
+                        <a href="{{ url_for('admin_news_list') }}" class="btn btn-secondary">Cancel</a>
+                        <button type="submit" class="btn btn-primary">{% if article %}Update Article{% else %}Create Article{% endif %}</button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <style>
+        /* Additional styles for this page */
+        textarea {
+            font-family: 'Courier New', monospace;
+        }
+    </style>
+</body>
+</html>

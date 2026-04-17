@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Members - Kalpeon Admin</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin-style.css') }}">
+</head>
+<body>
+    <div class="admin-layout">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Kalpeon Admin</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <li><a href="{{ url_for('admin_dashboard') }}">📊 Dashboard</a></li>
+                <li><a href="{{ url_for('admin_news_list') }}">📰 News</a></li>
+                <li><a href="{{ url_for('admin_industries_list') }}">🏭 Industries</a></li>
+                <li><a href="{{ url_for('admin_services_list') }}">⚙️ Services</a></li>
+                <li><a href="{{ url_for('admin_jobs_list') }}">💼 Jobs</a></li>
+                <li><a href="{{ url_for('admin_team_list') }}" class="active">👥 Team</a></li>
+                <li><a href="{{ url_for('admin_contacts_list') }}">📧 Contacts</a></li>
+                <li><a href="{{ url_for('admin_settings') }}">⚙️ Settings</a></li>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="{{ url_for('admin_logout') }}" style="color: #ff6b6b;">🚪 Logout</a>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <div class="topbar">
+                <h1>Team Members Management</h1>
+                <a href="{{ url_for('admin_team_create') }}" class="btn btn-primary">+ Add Team Member</a>
+            </div>
+
+            {% if success_message %}
+            <div class="alert alert-success">{{ success_message }}</div>
+            {% endif %}
+
+            <div class="content-section">
+                {% if team_members %}
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Photo</th>
+                            <th>Name</th>
+                            <th>Position</th>
+                            <th>Department</th>
+                            <th>Contact</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for member in team_members %}
+                        <tr>
+                            <td>
+                                {% if member.photo_url %}
+                                <img src="{{ member.photo_url }}" alt="{{ member.name }}" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
+                                {% else %}
+                                <div style="width: 40px; height: 40px; border-radius: 50%; background-color: #ccc; display: flex; align-items: center; justify-content: center;">👤</div>
+                                {% endif %}
+                            </td>
+                            <td><strong>{{ member.name }}</strong></td>
+                            <td>{{ member.position }}</td>
+                            <td>{{ member.department }}</td>
+                            <td>{{ member.email }}</td>
+                            <td>
+                                <div class="action-buttons">
+                                    <a href="{{ url_for('admin_team_edit', team_id=member.id) }}" class="btn btn-info btn-sm">Edit</a>
+                                    <form method="POST" action="{{ url_for('admin_team_delete', team_id=member.id) }}" style="display: inline;" onsubmit="return confirm('Are you sure?');">
+                                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <div class="no-data">
+                    <p>No team members found. <a href="{{ url_for('admin_team_create') }}">Add one now!</a></p>
+                </div>
+                {% endif %}
+            </div>
+        </main>
+    </div>
+</body>
+</html>

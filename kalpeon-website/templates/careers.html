@@ -1,0 +1,187 @@
+{% extends "base.html" %}
+
+{% block title %}Careers - Kalpeon Group of Industry{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<div class="page-header">
+    <h1>Careers at Kalpeon</h1>
+    <p>Join Our Growing Team Globally</p>
+</div>
+
+<!-- About Careers -->
+<section class="careers-intro">
+    <div class="container">
+        <h2>Work with Us</h2>
+        <p>At Kalpeon, we believe our people are our greatest asset. We offer a dynamic work environment, opportunities for growth, and a culture that values innovation, integrity, and excellence.</p>
+        
+        <div class="career-benefits">
+            <div class="benefit-item">
+                <i class="fas fa-star"></i>
+                <h3>Career Growth</h3>
+                <p>Clear pathways for advancement and professional development</p>
+            </div>
+            <div class="benefit-item">
+                <i class="fas fa-heartbeat"></i>
+                <h3>Health & Wellness</h3>
+                <p>Comprehensive health insurance and wellness programs</p>
+            </div>
+            <div class="benefit-item">
+                <i class="fas fa-balance-scale"></i>
+                <h3>Work-Life Balance</h3>
+                <p>Flexible working arrangements and generous leave policies</p>
+            </div>
+            <div class="benefit-item">
+                <i class="fas fa-graduation-cap"></i>
+                <h3>Learning & Development</h3>
+                <p>Ongoing training and skill development programs</p>
+            </div>
+            <div class="benefit-item">
+                <i class="fas fa-globe"></i>
+                <h3>Global Opportunities</h3>
+                <p>Work across different countries and cultures</p>
+            </div>
+            <div class="benefit-item">
+                <i class="fas fa-handshake"></i>
+                <h3>Competitive Benefits</h3>
+                <p>Competitive salary packages and performance incentives</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Job Listings -->
+<section class="jobs-section">
+    <div class="container">
+        <h2>Current Openings</h2>
+        
+        {% if jobs %}
+        <div class="jobs-list">
+            {% for job in jobs %}
+            <div class="job-card">
+                <div class="job-header">
+                    <h3>{{ job.title }}</h3>
+                    <span class="job-type">{{ job.type }}</span>
+                </div>
+                <div class="job-details">
+                    <span class="job-location">
+                        <i class="fas fa-map-marker-alt"></i> {{ job.location }}
+                    </span>
+                    <span class="job-department">
+                        <i class="fas fa-briefcase"></i> {{ job.department }}
+                    </span>
+                </div>
+                <p class="job-description">We are looking for a talented professional to join our {{ job.department }} team. You will have the opportunity to contribute to exciting projects and make a significant impact.</p>
+                <button class="btn btn-primary apply-btn" onclick="applyForJob('{{ job.title }}')">Apply Now</button>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="no-jobs">
+            <p>No current openings. Please check back soon!</p>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Why Join Kalpeon -->
+<section class="why-join">
+    <div class="container">
+        <h2>Why Join Kalpeon?</h2>
+        <div class="reasons-grid">
+            <div class="reason-card">
+                <h3>Innovation Culture</h3>
+                <p>We encourage creativity and innovative thinking across all levels of the organization</p>
+            </div>
+            <div class="reason-card">
+                <h3>Diverse Environment</h3>
+                <p>Work with talented professionals from different backgrounds and cultures worldwide</p>
+            </div>
+            <div class="reason-card">
+                <h3>Leadership Support</h3>
+                <p>Strong mentorship and guidance from industry experts and experienced leaders</p>
+            </div>
+            <div class="reason-card">
+                <h3>Global Impact</h3>
+                <p>Your work directly contributes to projects that impact millions of people globally</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Application Modal -->
+<div id="applicationModal" class="modal">
+    <div class="modal-content">
+        <span class="modal-close">&times;</span>
+        <h2>Apply for Position</h2>
+        <p id="jobTitle"></p>
+        
+        <form id="applicationForm" class="application-form">
+            <input type="hidden" id="jobTitleInput" name="job_title">
+            
+            <div class="form-group">
+                <label for="appName">Full Name *</label>
+                <input type="text" id="appName" name="name" required>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="appEmail">Email *</label>
+                    <input type="email" id="appEmail" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="appPhone">Phone *</label>
+                    <input type="tel" id="appPhone" name="phone" required>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="appExperience">Years of Experience *</label>
+                <input type="number" id="appExperience" name="experience" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="appMessage">Cover Letter</label>
+                <textarea id="appMessage" name="message" rows="4"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="appResume">Upload Resume (PDF) *</label>
+                <input type="file" id="appResume" name="resume" accept=".pdf" required>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Submit Application</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+const modal = document.getElementById('applicationModal');
+const closeBtn = document.querySelector('.modal-close');
+
+function applyForJob(jobTitle) {
+    document.getElementById('jobTitle').textContent = 'Position: ' + jobTitle;
+    document.getElementById('jobTitleInput').value = jobTitle;
+    modal.style.display = 'block';
+}
+
+closeBtn.onclick = function() {
+    modal.style.display = 'none';
+}
+
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = 'none';
+    }
+}
+
+document.getElementById('applicationForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    alert('Thank you for applying! We will review your application and contact you soon.');
+    modal.style.display = 'none';
+    this.reset();
+});
+</script>
+{% endblock %}

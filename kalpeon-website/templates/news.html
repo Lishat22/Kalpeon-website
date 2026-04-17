@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}News - Kalpeon Group of Industry{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<div class="page-header">
+    <h1>Latest News</h1>
+    <p>Stay Updated with Kalpeon's Latest Announcements</p>
+</div>
+
+<!-- News Grid -->
+<section class="news-full">
+    <div class="container">
+        <div class="news-full-grid">
+            {% for news_item in news %}
+            <article class="news-full-card">
+                <div class="news-image">
+                    <div class="news-placeholder">
+                        <i class="fas fa-newspaper"></i>
+                    </div>
+                </div>
+                <div class="news-full-content">
+                    <span class="news-date">
+                        <i class="fas fa-calendar"></i> {{ news_item.date }}
+                    </span>
+                    <h2>{{ news_item.title }}</h2>
+                    <p class="news-excerpt">{{ news_item.content[:150] }}...</p>
+                    <div class="news-meta">
+                        <span class="category">Announcement</span>
+                    </div>
+                    <a href="/news/{{ news_item.id }}" class="btn btn-primary btn-small">Read Full Article</a>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+
+        <!-- If no news -->
+        {% if not news %}
+        <div class="no-content">
+            <i class="fas fa-inbox"></i>
+            <p>No news articles available at this time.</p>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Subscribe Section -->
+<section class="subscribe-section">
+    <div class="container">
+        <div class="subscribe-box">
+            <h2>Get News Updates</h2>
+            <p>Subscribe to our newsletter and stay informed about latest developments</p>
+            <form id="newsLetterForm" class="subscribe-form">
+                <input type="email" placeholder="Enter your email address" required>
+                <button type="submit" class="btn btn-primary">Subscribe</button>
+            </form>
+            <p class="subscribe-note">We respect your privacy. Unsubscribe anytime.</p>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.getElementById('newsLetterForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const email = this.querySelector('input[type="email"]').value;
+    
+    fetch('/api/newsletter', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: 'email=' + encodeURIComponent(email)
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data.message);
+        this.reset();
+    })
+    .catch(error => alert('Error: ' + error));
+});
+</script>
+{% endblock %}

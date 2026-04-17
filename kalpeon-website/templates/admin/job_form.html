@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if job %}Edit Job{% else %}Post Job{% endif %} - Kalpeon Admin</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin-style.css') }}">
+</head>
+<body>
+    <div class="admin-layout">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Kalpeon Admin</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <li><a href="{{ url_for('admin_dashboard') }}">📊 Dashboard</a></li>
+                <li><a href="{{ url_for('admin_news_list') }}">📰 News</a></li>
+                <li><a href="{{ url_for('admin_industries_list') }}">🏭 Industries</a></li>
+                <li><a href="{{ url_for('admin_services_list') }}">⚙️ Services</a></li>
+                <li><a href="{{ url_for('admin_jobs_list') }}" class="active">💼 Jobs</a></li>
+                <li><a href="{{ url_for('admin_team_list') }}">👥 Team</a></li>
+                <li><a href="{{ url_for('admin_contacts_list') }}">📧 Contacts</a></li>
+                <li><a href="{{ url_for('admin_settings') }}">⚙️ Settings</a></li>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="{{ url_for('admin_logout') }}" style="color: #ff6b6b;">🚪 Logout</a>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <div class="topbar">
+                <h1>{% if job %}Edit Job{% else %}Post New Job{% endif %}</h1>
+            </div>
+
+            {% if errors %}
+            <div class="alert alert-error">
+                <ul style="margin: 0; padding-left: 20px;">
+                    {% for error in errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
+            <div class="content-section">
+                <form method="POST">
+                    <div class="form-group">
+                        <label for="title">Job Title *</label>
+                        <input type="text" id="title" name="title" required value="{{ job.title if job else '' }}">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="department">Department *</label>
+                            <input type="text" id="department" name="department" required value="{{ job.department if job else '' }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="location">Location *</label>
+                            <input type="text" id="location" name="location" required value="{{ job.location if job else '' }}">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="job_type">Job Type *</label>
+                            <select id="job_type" name="job_type" required>
+                                <option value="">Select Job Type</option>
+                                <option value="Full-Time" {% if job and job.job_type == 'Full-Time' %}selected{% endif %}>Full-Time</option>
+                                <option value="Part-Time" {% if job and job.job_type == 'Part-Time' %}selected{% endif %}>Part-Time</option>
+                                <option value="Contract" {% if job and job.job_type == 'Contract' %}selected{% endif %}>Contract</option>
+                                <option value="Temporary" {% if job and job.job_type == 'Temporary' %}selected{% endif %}>Temporary</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="salary_range">Salary Range</label>
+                            <input type="text" id="salary_range" name="salary_range" value="{{ job.salary_range if job else '' }}" placeholder="e.g., $50,000 - $80,000">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Job Description *</label>
+                        <textarea id="description" name="description" required>{{ job.description if job else '' }}</textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="requirements">Requirements *</label>
+                        <textarea id="requirements" name="requirements" required>{{ job.requirements if job else '' }}</textarea>
+                    </div>
+
+                    <div class="form-check">
+                        <input type="checkbox" id="is_active" name="is_active" value="on" {% if job and job.is_active %}checked{% endif %}>
+                        <label for="is_active">Job is currently active and accepting applications</label>
+                    </div>
+
+                    <div class="form-buttons">
+                        <a href="{{ url_for('admin_jobs_list') }}" class="btn btn-secondary">Cancel</a>
+                        <button type="submit" class="btn btn-primary">{% if job %}Update Job{% else %}Post Job{% endif %}</button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block title %}{{ news.title }} - Kalpeon News{% endblock %}
+
+{% block content %}
+<!-- Article Header -->
+<div class="page-header">
+    <h1>{{ news.title }}</h1>
+    <p>
+        <i class="fas fa-calendar"></i> {{ news.date }}
+        <span class="divider">|</span>
+        <span class="category">Announcement</span>
+    </p>
+</div>
+
+<!-- Article Content -->
+<section class="article-detail">
+    <div class="article-container">
+        <div class="article-image">
+            <div class="article-placeholder">
+                <i class="fas fa-newspaper"></i>
+            </div>
+        </div>
+        
+        <article class="article-body">
+            <p>{{ news.content }}</p>
+            
+            <p>Kalpeon Group continues to invest in innovation and sustainable practices across all our business segments. This initiative aligns with our long-term vision to create positive impact on society while maintaining operational excellence.</p>
+            
+            <h3>Key Highlights</h3>
+            <ul>
+                <li>Strategic expansion into new markets</li>
+                <li>Enhanced investment in research and development</li>
+                <li>Commitment to environmental sustainability</li>
+                <li>Strengthened global partnerships</li>
+            </ul>
+            
+            <p>Our leadership team remains dedicated to delivering value for all stakeholders while navigating the evolving global business landscape.</p>
+            
+            <div class="article-footer">
+                <div class="article-meta">
+                    <span class="published">Published: {{ news.date }}</span>
+                </div>
+                <div class="article-share">
+                    <p>Share this article:</p>
+                    <div class="share-buttons">
+                        <a href="#" class="share-btn facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="share-btn twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="share-btn linkedin"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="share-btn email"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </div>
+    
+    <!-- Related News -->
+    <section class="related-news">
+        <h3>Related News</h3>
+        <div class="news-cards-row">
+            <div class="news-card-small">
+                <i class="fas fa-newspaper"></i>
+                <h4>Expansion Initiative Announced</h4>
+                <p>Kalpeon to establish 10 new regional offices...</p>
+                <a href="/news">Read More</a>
+            </div>
+            <div class="news-card-small">
+                <i class="fas fa-newspaper"></i>
+                <h4>Technology Innovation Hub Launched</h4>
+                <p>New R&D center focused on AI and IoT solutions...</p>
+                <a href="/news">Read More</a>
+            </div>
+            <div class="news-card-small">
+                <i class="fas fa-newspaper"></i>
+                <h4>Sustainability Report Released</h4>
+                <p>Kalpeon achieves major environmental targets...</p>
+                <a href="/news">Read More</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Back Link -->
+    <div class="back-link">
+        <a href="/news"><i class="fas fa-arrow-left"></i> Back to News</a>
+    </div>
+</section>
+{% endblock %}

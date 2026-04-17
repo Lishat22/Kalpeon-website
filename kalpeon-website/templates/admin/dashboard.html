@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Kalpeon</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        /* Sidebar */
+        .admin-layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 250px;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            padding: 2rem 0;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .sidebar-header {
+            padding: 0 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 1.5rem;
+        }
+
+        .sidebar-header h2 {
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .sidebar-header p {
+            color: rgba(255,255,255,0.8);
+            font-size: 0.85rem;
+        }
+
+        .sidebar-nav {
+            list-style: none;
+        }
+
+        .sidebar-nav li {
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .sidebar-nav a {
+            display: block;
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            padding: 1rem 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-nav a:hover {
+            background-color: rgba(255,255,255,0.1);
+            color: white;
+            padding-left: 2rem;
+        }
+
+        .sidebar-nav a.active {
+            background-color: #f39c12;
+            color: white;
+        }
+
+        .sidebar-nav a i {
+            margin-right: 0.7rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        .sidebar-footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            padding: 1rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .sidebar-footer a {
+            display: block;
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-footer a:hover {
+            background-color: rgba(255,255,255,0.1);
+            color: white;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: 250px;
+            padding: 2rem;
+        }
+
+        .topbar {
+            background: white;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .topbar h1 {
+            color: #1e3c72;
+            font-size: 1.5rem;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-info a {
+            background-color: #dc3545;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .user-info a:hover {
+            background-color: #c82333;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .stat-card i {
+            font-size: 2.5rem;
+            color: #f39c12;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #1e3c72;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Content Sections */
+        .content-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 2rem;
+        }
+
+        .content-section h2 {
+            color: #1e3c72;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .recent-item {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .recent-item:last-child {
+            border-bottom: none;
+        }
+
+        .item-info h4 {
+            color: #1e3c72;
+            margin-bottom: 0.3rem;
+        }
+
+        .item-info p {
+            color: #666;
+            font-size: 0.85rem;
+        }
+
+        .item-date {
+            color: #999;
+            font-size: 0.85rem;
+        }
+
+        /* Messages */
+        .alert {
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+        }
+
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                position: fixed;
+                left: -250px;
+                z-index: 1000;
+                transition: left 0.3s ease;
+            }
+
+            .sidebar.active {
+                left: 0;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .topbar {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fas fa-cog"></i> Admin Panel</h2>
+                <p>Kalpeon Management</p>
+            </div>
+
+            <nav>
+                <ul class="sidebar-nav">
+                    <li><a href="{{ url_for('admin_dashboard') }}" class="{% if request.endpoint == 'admin_dashboard' %}active{% endif %}">
+                        <i class="fas fa-th-large"></i> Dashboard
+                    </a></li>
+                    <li><a href="{{ url_for('admin_news_list') }}" class="{% if 'news' in request.endpoint %}active{% endif %}">
+                        <i class="fas fa-newspaper"></i> News
+                    </a></li>
+                    <li><a href="{{ url_for('admin_industries_list') }}" class="{% if 'industri' in request.endpoint %}active{% endif %}">
+                        <i class="fas fa-industry"></i> Industries
+                    </a></li>
+                    <li><a href="{{ url_for('admin_services_list') }}" class="{% if 'service' in request.endpoint %}active{% endif %}">
+                        <i class="fas fa-cogs"></i> Services
+                    </a></li>
+                    <li><a href="{{ url_for('admin_jobs_list') }}" class="{% if 'job' in request.endpoint %}active{% endif %}">
+                        <i class="fas fa-briefcase"></i> Jobs
+                    </a></li>
+                    <li><a href="{{ url_for('admin_team_list') }}" class="{% if 'team' in request.endpoint %}active{% endif %}">
+                        <i class="fas fa-users"></i> Team
+                    </a></li>
+                    <li><a href="{{ url_for('admin_contacts_list') }}" class="{% if 'contact' in request.endpoint %}active{% endif %}">
+                        <i class="fas fa-envelope"></i> Contacts
+                    </a></li>
+                    <li><a href="{{ url_for('admin_settings') }}" class="{% if 'setting' in request.endpoint %}active{% endif %}">
+                        <i class="fas fa-sliders-h"></i> Settings
+                    </a></li>
+                </ul>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="{{ url_for('admin_logout') }}">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="topbar">
+                <h1><i class="fas fa-tachometer-alt"></i> Dashboard</h1>
+                <div class="user-info">
+                    <span>{{ current_user.username }}</span>
+                    <a href="{{ url_for('admin_logout') }}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </div>
+            </div>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{% if category == 'error' %}error{% else %}success{% endif %}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <!-- Statistics -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <i class="fas fa-newspaper"></i>
+                    <div class="stat-number">{{ stats.total_news }}</div>
+                    <div class="stat-label">Total News</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-briefcase"></i>
+                    <div class="stat-number">{{ stats.total_jobs }}</div>
+                    <div class="stat-label">Job Postings</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-industry"></i>
+                    <div class="stat-number">{{ stats.total_industries }}</div>
+                    <div class="stat-label">Industries</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-envelope"></i>
+                    <div class="stat-number" style="color: #dc3545;">{{ stats.new_contacts }}</div>
+                    <div class="stat-label">New Contacts</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-users"></i>
+                    <div class="stat-number">{{ stats.total_team }}</div>
+                    <div class="stat-label">Team Members</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-cogs"></i>
+                    <div class="stat-number">{{ stats.total_services }}</div>
+                    <div class="stat-label">Services</div>
+                </div>
+            </div>
+
+            <!-- Recent News -->
+            {% if recent_news %}
+            <div class="content-section">
+                <h2><i class="fas fa-newspaper"></i> Recent News</h2>
+                {% for news in recent_news %}
+                <div class="recent-item">
+                    <div class="item-info">
+                        <h4>{{ news.title }}</h4>
+                        <p>{{ news.content[:100] }}...</p>
+                    </div>
+                    <div class="item-date">{{ news.created_at.strftime('%Y-%m-%d %H:%M') }}</div>
+                </div>
+                {% endfor %}
+                <div style="margin-top: 1rem;">
+                    <a href="{{ url_for('admin_news_list') }}" style="color: #2a5298; text-decoration: none; font-weight: 600;">View all news →</a>
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Recent Contacts -->
+            {% if recent_contacts %}
+            <div class="content-section">
+                <h2><i class="fas fa-envelope"></i> Recent Contact Submissions</h2>
+                {% for contact in recent_contacts %}
+                <div class="recent-item">
+                    <div class="item-info">
+                        <h4>{{ contact.name }} ({{ contact.email }})</h4>
+                        <p>{{ contact.subject }}</p>
+                    </div>
+                    <div class="item-date">{{ contact.created_at.strftime('%Y-%m-%d %H:%M') }}</div>
+                </div>
+                {% endfor %}
+                <div style="margin-top: 1rem;">
+                    <a href="{{ url_for('admin_contacts_list') }}" style="color: #2a5298; text-decoration: none; font-weight: 600;">View all contacts →</a>
+                </div>
+            </div>
+            {% endif %}
+        </main>
+    </div>
+</body>
+</html>

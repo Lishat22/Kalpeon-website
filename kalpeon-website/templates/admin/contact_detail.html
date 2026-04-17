@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Contact Message - Kalpeon Admin</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin-style.css') }}">
+</head>
+<body>
+    <div class="admin-layout">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Kalpeon Admin</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <li><a href="{{ url_for('admin_dashboard') }}">📊 Dashboard</a></li>
+                <li><a href="{{ url_for('admin_news_list') }}">📰 News</a></li>
+                <li><a href="{{ url_for('admin_industries_list') }}">🏭 Industries</a></li>
+                <li><a href="{{ url_for('admin_services_list') }}">⚙️ Services</a></li>
+                <li><a href="{{ url_for('admin_jobs_list') }}">💼 Jobs</a></li>
+                <li><a href="{{ url_for('admin_team_list') }}">👥 Team</a></li>
+                <li><a href="{{ url_for('admin_contacts_list') }}" class="active">📧 Contacts</a></li>
+                <li><a href="{{ url_for('admin_settings') }}">⚙️ Settings</a></li>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="{{ url_for('admin_logout') }}" style="color: #ff6b6b;">🚪 Logout</a>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <div class="topbar">
+                <h1>Contact Message</h1>
+                <a href="{{ url_for('admin_contacts_list') }}" class="btn btn-secondary">← Back</a>
+            </div>
+
+            <div class="content-section">
+                <div style="background-color: #f8f9fa; padding: 1.5rem; border-radius: 5px; margin-bottom: 1.5rem;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 1.5rem;">
+                        <div>
+                            <h3 style="color: #666; margin-bottom: 0.5rem; font-size: 0.85rem; text-transform: uppercase;">Name</h3>
+                            <p style="font-size: 1.1rem; margin: 0;">{{ contact.name }}</p>
+                        </div>
+                        <div>
+                            <h3 style="color: #666; margin-bottom: 0.5rem; font-size: 0.85rem; text-transform: uppercase;">Email</h3>
+                            <p style="font-size: 1.1rem; margin: 0;"><a href="mailto:{{ contact.email }}" style="color: #2a5298;">{{ contact.email }}</a></p>
+                        </div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                        <div>
+                            <h3 style="color: #666; margin-bottom: 0.5rem; font-size: 0.85rem; text-transform: uppercase;">Phone</h3>
+                            <p style="font-size: 1.1rem; margin: 0;"><a href="tel:{{ contact.phone }}" style="color: #2a5298;">{{ contact.phone }}</a></p>
+                        </div>
+                        <div>
+                            <h3 style="color: #666; margin-bottom: 0.5rem; font-size: 0.85rem; text-transform: uppercase;">Received</h3>
+                            <p style="font-size: 1.1rem; margin: 0;">{{ contact.created_at.strftime('%B %d, %Y at %I:%M %p') }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 1.5rem;">
+                    <h3 style="color: #1e3c72; margin-bottom: 0.5rem;">Subject</h3>
+                    <p style="font-size: 1.05rem; color: #333;">{{ contact.subject }}</p>
+                </div>
+
+                <div style="margin-bottom: 2rem;">
+                    <h3 style="color: #1e3c72; margin-bottom: 1rem;">Message</h3>
+                    <div style="background-color: white; padding: 1.5rem; border: 1px solid #ddd; border-radius: 5px; line-height: 1.6; white-space: pre-wrap;">{{ contact.message }}</div>
+                </div>
+
+                {% if contact.company %}
+                <div style="margin-bottom: 1.5rem;">
+                    <h3 style="color: #1e3c72; margin-bottom: 0.5rem;">Company</h3>
+                    <p style="font-size: 1rem; color: #666;">{{ contact.company }}</p>
+                </div>
+                {% endif %}
+
+                {% if contact.service_interested %}
+                <div style="margin-bottom: 2rem;">
+                    <h3 style="color: #1e3c72; margin-bottom: 0.5rem;">Interested In</h3>
+                    <p style="font-size: 1rem; color: #666;">{{ contact.service_interested }}</p>
+                </div>
+                {% endif %}
+
+                <div style="border-top: 1px solid #ddd; padding-top: 1.5rem;">
+                    <h3 style="color: #1e3c72; margin-bottom: 1rem; font-size: 1rem;">Status</h3>
+                    <form method="POST" style="display: flex; gap: 1rem; align-items: center;">
+                        <button type="submit" name="action" value="mark_read" class="btn btn-success">✓ Mark as Read</button>
+                        
+                        <a href="{{ url_for('admin_contacts_list') }}" class="btn btn-secondary">← Back to List</a>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

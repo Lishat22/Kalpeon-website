@@ -1,0 +1,166 @@
+{% extends "base.html" %}
+
+{% block title %}About Us - Kalpeon Group of Industry{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<div class="page-header">
+    <h1>About Kalpeon Group</h1>
+    <p>Our Journey, Vision, and Values</p>
+</div>
+
+<!-- About Content -->
+<section class="about-section">
+    <div class="container">
+        <div class="about-grid">
+            <div class="about-content">
+                <h2>Who We Are</h2>
+                <p>Kalpeon Group of Industry is a multinational conglomerate founded in 1995, with a diverse portfolio spanning manufacturing, technology, energy, pharmaceuticals, real estate, and logistics. We have grown to become a leading player in these industries with operations across 50+ countries.</p>
+                
+                <h3>Our Mission</h3>
+                <p>To create value for all stakeholders through innovation, operational excellence, and sustainable business practices.</p>
+                
+                <h3>Our Vision</h3>
+                <p>To be the world's most trusted and admired multinational conglomerate, known for excellence, integrity, and positive impact on society.</p>
+                
+                <h3>Our Values</h3>
+                <ul class="values-list">
+                    <li><strong>Integrity:</strong> Conducting business with honesty and transparency</li>
+                    <li><strong>Innovation:</strong> Continuously improving and embracing new technologies</li>
+                    <li><strong>Excellence:</strong> Delivering superior quality in everything we do</li>
+                    <li><strong>Sustainability:</strong> Protecting the environment for future generations</li>
+                    <li><strong>People:</strong> Valuing and developing our talented workforce</li>
+                </ul>
+            </div>
+            
+            <div class="about-stats">
+                <div class="stat-box">
+                    <div class="stat-number">30+</div>
+                    <p>Years of Excellence</p>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">50+</div>
+                    <p>Countries Operating In</p>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">500K+</div>
+                    <p>Employees Worldwide</p>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">$50B+</div>
+                    <p>Annual Revenue</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Team Section -->
+<section class="team-section">
+    <div class="container">
+        <h2>Leadership Team</h2>
+        <p class="section-subtitle">Meet the visionary leaders driving Kalpeon's success</p>
+        
+        <div class="team-grid">
+            {% for member in team %}
+            <div class="team-card">
+                <div class="team-image">
+                    <div class="placeholder-image">
+                        <i class="fas fa-user"></i>
+                    </div>
+                </div>
+                <div class="team-info">
+                    <h3>{{ member.name }}</h3>
+                    <p class="position">{{ member.position }}</p>
+                    <p class="bio">Leading innovation and strategic growth in our organization with decades of industry experience.</p>
+                    <div class="team-social">
+                        <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Milestones -->
+<section class="milestones">
+    <div class="container">
+        <h2>Key Milestones</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-date">1995</div>
+                <div class="timeline-content">
+                    <h3>Kalpeon Founded</h3>
+                    <p>Establishment of Kalpeon Group with initial operations in manufacturing sector</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">2005</div>
+                <div class="timeline-content">
+                    <h3>International Expansion</h3>
+                    <p>Expansion to 15+ countries and diversification into technology sector</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">2010</div>
+                <div class="timeline-content">
+                    <h3>Fortune 500 Listing</h3>
+                    <p>Achieved Fortune 500 status with operations in 30+ countries</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">2015</div>
+                <div class="timeline-content">
+                    <h3>Sustainability Initiative</h3>
+                    <p>Launched major sustainability programs targeting carbon neutrality</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">2020</div>
+                <div class="timeline-content">
+                    <h3>Digital Transformation</h3>
+                    <p>Major investment in AI, IoT, and cloud technologies across all sectors</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">2026</div>
+                <div class="timeline-content">
+                    <h3>Global Leadership</h3>
+                    <p>Now operating in 50+ countries with 500,000+ employees</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Awards & Recognition -->
+<section class="awards-section">
+    <div class="container">
+        <h2>Awards & Recognition</h2>
+        <div class="awards-grid">
+            <div class="award-card">
+                <i class="fas fa-trophy"></i>
+                <h3>Best Multinational Company 2025</h3>
+                <p>Global Business Excellence Awards</p>
+            </div>
+            <div class="award-card">
+                <i class="fas fa-star"></i>
+                <h3>Sustainability Leadership Award</h3>
+                <p>International Green Business Forum</p>
+            </div>
+            <div class="award-card">
+                <i class="fas fa-medal"></i>
+                <h3>Innovation Excellence</h3>
+                <p>Global Technology Innovation Summit</p>
+            </div>
+            <div class="award-card">
+                <i class="fas fa-award"></i>
+                <h3>Best Employer 2025</h3>
+                <p>Global Talent & Employment Association</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

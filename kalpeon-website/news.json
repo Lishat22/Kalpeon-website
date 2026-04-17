@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "title": "Kalpeon Expands to Asia-Pacific Region",
+    "date": "2026-03-15",
+    "content": "We are thrilled to announce our expansion into the Asia-Pacific region with new offices in Singapore, Tokyo, and Mumbai.",
+    "image": "news1.jpg"
+  },
+  {
+    "id": 2,
+    "title": "Sustainability Initiative Launched",
+    "date": "2026-02-28",
+    "content": "Kalpeon Group commits to achieving carbon neutrality by 2030 with major investments in renewable energy.",
+    "image": "news2.jpg"
+  }
+]

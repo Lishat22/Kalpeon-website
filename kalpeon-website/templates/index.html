@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Kalpeon Group of Industry{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-content">
+        <h1>Kalpeon Group of Industry</h1>
+        <p>Leading Multinational Conglomerate</p>
+        <p class="hero-subtext">Excellence in Manufacturing, Technology, Energy, Pharmaceuticals, Real Estate & Logistics</p>
+        <div class="hero-buttons">
+            <a href="/about" class="btn btn-primary">Learn More</a>
+            <a href="/contact" class="btn btn-secondary">Get in Touch</a>
+        </div>
+    </div>
+</section>
+
+
+<!-- Features Section -->
+<section class="features">
+    <div class="container">
+        <h2>Why Choose Kalpeon?</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <i class="fas fa-globe"></i>
+                <h3>Global Presence</h3>
+                <p>Operating across 50+ countries with offices in major business hubs worldwide</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-cogs"></i>
+                <h3>Advanced Technology</h3>
+                <p>Cutting-edge technology and innovation at the core of our operations</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-users"></i>
+                <h3>Expert Team</h3>
+                <p>500,000+ skilled professionals dedicated to excellence</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-leaf"></i>
+                <h3>Sustainability</h3>
+                <p>Committed to environmental responsibility and sustainable growth</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Industries Section -->
+<section class="industries-preview">
+    <div class="container">
+        <h2>Our Industries</h2>
+        <div class="industries-grid">
+            <div class="industry-item">
+                <i class="fas fa-industry"></i>
+                <h3>Manufacturing</h3>
+                <p>Advanced manufacturing facilities with ISO certifications</p>
+            </div>
+            <div class="industry-item">
+                <i class="fas fa-laptop"></i>
+                <h3>Technology</h3>
+                <p>IT solutions and digital transformation</p>
+            </div>
+            <div class="industry-item">
+                <i class="fas fa-bolt"></i>
+                <h3>Energy</h3>
+                <p>Renewable and sustainable energy solutions</p>
+            </div>
+            <div class="industry-item">
+                <i class="fas fa-flask"></i>
+                <h3>Pharmaceuticals</h3>
+                <p>Research & development in healthcare</p>
+            </div>
+            <div class="industry-item">
+                <i class="fas fa-building"></i>
+                <h3>Real Estate</h3>
+                <p>Commercial and residential development</p>
+            </div>
+            <div class="industry-item">
+                <i class="fas fa-truck"></i>
+                <h3>Logistics</h3>
+                <p>Global supply chain management</p>
+            </div>
+        </div>
+        <div class="text-center">
+            <a href="/industries" class="btn btn-primary">Explore All Industries</a>
+        </div>
+    </div>
+</section>
+
+<!-- News Section -->
+<section class="news-section">
+    <div class="container">
+        <h2>Latest News</h2>
+        <div class="news-grid">
+            {% for news_item in featured_news %}
+            <div class="news-card">
+                <div class="news-image">
+                    <i class="fas fa-newspaper"></i>
+                </div>
+                <div class="news-content">
+                    <span class="news-date">{{ news_item.date }}</span>
+                    <h3>{{ news_item.title }}</h3>
+                    <p>{{ news_item.content }}</p>
+                    <a href="/news/{{ news_item.id }}" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="text-center">
+            <a href="/news" class="btn btn-primary">View All News</a>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+    <div class="container">
+        <h2>Ready to Partner with Kalpeon?</h2>
+        <p>Get in touch with our team to explore opportunities and collaborations</p>
+        <a href="/contact" class="btn btn-primary btn-large">Contact Us Today</a>
+    </div>
+</section>
+{% endblock %}

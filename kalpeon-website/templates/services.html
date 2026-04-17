@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+{% block title %}Services - Kalpeon Group of Industry{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<div class="page-header">
+    <h1>Our Services</h1>
+    <p>Comprehensive Solutions for Your Business Needs</p>
+</div>
+
+<!-- Services Grid -->
+<section class="services-detailed">
+    <div class="container">
+        <div class="services-grid">
+            {% for service in services %}
+            <div class="service-card">
+                <div class="service-icon">
+                    {% if 'Consulting' in service.title %}
+                        <i class="fas fa-lightbulb"></i>
+                    {% elif 'Infrastructure' in service.title %}
+                        <i class="fas fa-building"></i>
+                    {% elif 'Technology' in service.title %}
+                        <i class="fas fa-laptop"></i>
+                    {% else %}
+                        <i class="fas fa-network-wired"></i>
+                    {% endif %}
+                </div>
+                <h3>{{ service.title }}</h3>
+                <p>{{ service.description }}</p>
+                <ul class="service-features">
+                    <li><i class="fas fa-check"></i> Expert consultation</li>
+                    <li><i class="fas fa-check"></i> Tailored solutions</li>
+                    <li><i class="fas fa-check"></i> 24/7 support</li>
+                </ul>
+                <a href="#" class="btn btn-primary">Learn More</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Service Process -->
+<section class="service-process">
+    <div class="container">
+        <h2>Our Service Process</h2>
+        <div class="process-steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Consultation</h3>
+                <p>We understand your unique requirements and challenges</p>
+            </div>
+            <div class="step-arrow"><i class="fas fa-arrow-right"></i></div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Analysis</h3>
+                <p>Detailed assessment of your needs and current situation</p>
+            </div>
+            <div class="step-arrow"><i class="fas fa-arrow-right"></i></div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Solution Design</h3>
+                <p>Customized solution strategy tailored to your business</p>
+            </div>
+            <div class="step-arrow"><i class="fas fa-arrow-right"></i></div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <h3>Implementation</h3>
+                <p>Seamless execution and deployment of solutions</p>
+            </div>
+            <div class="step-arrow"><i class="fas fa-arrow-right"></i></div>
+            <div class="step">
+                <div class="step-number">5</div>
+                <h3>Support</h3>
+                <p>Ongoing monitoring and continuous improvement</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Industry Solutions -->
+<section class="industry-solutions">
+    <div class="container">
+        <h2>Solutions by Industry</h2>
+        <div class="solutions-grid">
+            <div class="solution-box">
+                <h3><i class="fas fa-industry"></i> Manufacturing</h3>
+                <p>Process optimization, automation, quality management systems</p>
+            </div>
+            <div class="solution-box">
+                <h3><i class="fas fa-laptop"></i> Technology</h3>
+                <p>Digital transformation, cloud migration, AI integration</p>
+            </div>
+            <div class="solution-box">
+                <h3><i class="fas fa-bolt"></i> Energy</h3>
+                <p>Renewable energy systems, grid modernization, efficiency solutions</p>
+            </div>
+            <div class="solution-box">
+                <h3><i class="fas fa-capsules"></i> Pharmaceuticals</h3>
+                <p>R&D support, compliance management, supply chain optimization</p>
+            </div>
+            <div class="solution-box">
+                <h3><i class="fas fa-home"></i> Real Estate</h3>
+                <p>Property management, smart buildings, sustainable development</p>
+            </div>
+            <div class="solution-box">
+                <h3><i class="fas fa-truck"></i> Logistics</h3>
+                <p>Supply chain management, warehouse optimization, route planning</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="service-cta">
+    <div class="container">
+        <h2>Let's Work Together</h2>
+        <p>Get in touch with our service experts to find the perfect solution for your business</p>
+        <a href="/contact" class="btn btn-primary btn-large">Request a Consultation</a>
+    </div>
+</section>
+{% endblock %}
